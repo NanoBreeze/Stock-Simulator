@@ -42,8 +42,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Apple.boo" />
     <Compile Include="AssemblyInfo.boo" />
+    <Compile Include="Class1.boo" />
+    <Compile Include="Company.boo" />
+    <Compile Include="Player.boo" />
     <Compile Include="Program.boo" />
+    <Compile Include="PropertyExtensions.boo" />
   </ItemGroup>
   <Import Project="$(BooBinPath)\Boo.Microsoft.Build.targets" />
 </Project>

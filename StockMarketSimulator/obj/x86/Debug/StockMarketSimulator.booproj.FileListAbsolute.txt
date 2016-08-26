@@ -1,0 +1,9 @@
+C:\Users\Lenny\Documents\SharpDevelop Projects\StockMarketSimulator\StockMarketSimulator\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Lenny\Documents\SharpDevelop Projects\StockMarketSimulator\StockMarketSimulator\bin\Debug\StockMarketSimulator.exe
+C:\Users\Lenny\Documents\SharpDevelop Projects\StockMarketSimulator\StockMarketSimulator\bin\Debug\StockMarketSimulator.pdb
+C:\Users\Lenny\Documents\SharpDevelop Projects\StockMarketSimulator\StockMarketSimulator\bin\Debug\Boo.Lang.Useful.dll
+C:\Users\Lenny\Documents\SharpDevelop Projects\StockMarketSimulator\StockMarketSimulator\bin\Debug\Boo.Lang.Parser.dll
+C:\Users\Lenny\Documents\SharpDevelop Projects\StockMarketSimulator\StockMarketSimulator\bin\Debug\Boo.Lang.Compiler.dll
+C:\Users\Lenny\Documents\SharpDevelop Projects\StockMarketSimulator\StockMarketSimulator\bin\Debug\Boo.Lang.dll
+C:\Users\Lenny\Documents\SharpDevelop Projects\StockMarketSimulator\StockMarketSimulator\obj\x86\Debug\StockMarketSimulator.exe
+C:\Users\Lenny\Documents\SharpDevelop Projects\StockMarketSimulator\StockMarketSimulator\obj\x86\Debug\StockMarketSimulator.pdb
