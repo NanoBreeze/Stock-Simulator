@@ -8,6 +8,7 @@ import Boo.Lang.Extensions
 import Boo.Lang.Compiler
 import Boo.Lang.Compiler.Ast
 import StockMarketSimulator.IntegerExtensions
+import StockMarketSimulator.DoubleExtensions
 
 
 
@@ -22,6 +23,34 @@ def buy(company as Company, shareCount as int):
 	player.Portfolio[company.Ticker] = updatedShareCount
 	print player.Portfolio[company.Ticker]
 
+def increase(company as Company, amount as double):
+/*Increase the share price of the specified company. Although the amount is specified for double, it accepts integers too because of implicit cast
+	If the amount is negative, the increase is a percentage. 
+	If it's positive, the increase is by points*/
+	
+	#percentage
+	if amount < 0:
+		change = amount * -1/100 + 1
+		company.SharePrice *= change
+	else:
+		company.SharePrice += amount
+
+	print company.SharePrice
+	
+	
+def decrease(company as Company, amount as double):
+/*Increase the share price of the specified company. Although the amount is specified for double, it accepts integers too because of implicit cast
+	If the amount is negative, the increase is a percentage. 
+	If it's positive, the increase is by points*/
+	
+	#percentage
+	if amount < 0:
+		change = 1 + amount / 100  #remember amount is negative and so we +
+		company.SharePrice *= change
+	else:
+		company.SharePrice -= amount
+
+	print company.SharePrice
 
 AAPL = Apple(Ticker.AAPL, 200, 107, 1.3, 1.5)
 
@@ -29,6 +58,10 @@ AAPL = Apple(Ticker.AAPL, 200, 107, 1.3, 1.5)
 
 
 buy AAPL, 20.shares
+
+print AAPL.MarketCap
+decrease AAPL, 5.6.points
+print AAPL.MarketCap
 
 #print player.Portfolio
 

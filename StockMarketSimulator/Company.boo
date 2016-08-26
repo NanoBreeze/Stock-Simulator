@@ -12,14 +12,23 @@ enum Ticker:
 class Company:
 """ Inherited fields and methods for companies"""
 	
-	[Property(Ticker)]
+	
+	SharePrice as double:
+		get:
+			return _sharePrice
+		set:
+			initialSharePrice = _sharePrice
+			_sharePrice = value
+
+			_marketCap *= (_sharePrice / initialSharePrice) //assumes # of shares always remains constant
+			
+	_sharePrice as double
+	
+	[Getter(Ticker)]
 	_ticker as Ticker
 	
 	[Property(MarketCap)]
 	_marketCap as double
-	
-	[Property(SharePrice)]
-	_sharePrice as double
 	
 	[Property(Dividend)]
 	_dividend as double
