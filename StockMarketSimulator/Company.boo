@@ -15,7 +15,7 @@ enum Ticker:
 	FCAU
 	F
 	
-	
+
 
 class Company:
 """ Inherited fields and methods for companies"""

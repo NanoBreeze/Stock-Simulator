@@ -12,6 +12,27 @@ import Boo.Lang.Extensions
 
 investor = Investor()
 round = 0
+random = Random()
+tasks = []
+
+
+
+AAPL 	= Apple		(576000, 106.94, 2.11, 1.38)
+MSFT 	= Microsoft	(455000, 58.03, 2.48, 1.26)
+GOOGL 	= Google	(545000, 793.22, 0, 1.06)
+
+JPM 	= JPMorgan	(239150, 66.22, 2.91, 1.17)
+WFC 	= WellsFargo(244760, 48.51, 3.14, 0.90)
+C 		= Citigroup	(136870, 47.11, 0.66, 1.50)
+
+GM 		= GeneralMotors	(492500, 31.53, 4.82, 1.65)
+FCAU 	= Chrysler	(887000, 6.88, 0, 1.33)
+F		= Ford		(500900, 12.38, 5.81, 1.21)
+
+companies	= [AAPL, MSFT, GOOGL, JPM, WFC, C, GM, FCAU, F] #not DRY
+tech 		= [AAPL, MSFT, GOOGL]
+finance 	= [JPM, WFC, C]
+automobile 	= [GM, FCAU, F]
 
 
 def buy(company as Company, shareCount as int):
@@ -109,7 +130,17 @@ def decrease_beta(company as Company, amount as double):
 	#points
 	else:
 		company.Beta -= amount
+
+
+
+def create_bubble(list as List):
+	for c in list:
+		cast(Company, c).SharePrice *= 1 + random.NextDouble()
 		
+	
+def create_recession():
+	for company in companies:
+		cast(Company, company).SharePrice *= random.NextDouble()
 
 
 /*Tasks are schedulers.
@@ -118,8 +149,7 @@ task "Name":
 	execute:
 		[action] unless [action]
 	starting_when:
-		when:
-			...
+		[boolean]
 
 task "Name":
 	every [number] rounds	
@@ -140,41 +170,32 @@ def when(condition as bool, block as callable):
 	if condition:
 		block()
 
-//syntactic sugar, same as when(...)
+#syntactic sugar, identical to when
 def starting_when(condition as bool, block as callable):
-	when(condition, block)
+	if condition:
+		block()
+		return true
 	
-def execute(block as callable):
-	pass
+def repeat_every(roundCount as int, block as callable):
+	unless round % roundCount == 0 :
+		return false
+	block()
 
 def task(description as string, block as callable):
 	block()
 
 
-AAPL 	= Apple		(576000, 106.94, 2.11, 1.38)
-MSFT 	= Microsoft	(455000, 58.03, 2.48, 1.26)
-GOOGL 	= Google	(545000, 793.22, 0, 1.06)
 
-JPM 	= JPMorgan	(239150, 66.22, 2.91, 1.17)
-WFC 	= WellsFargo(244760, 48.51, 3.14, 0.90)
-C 		= Citigroup	(136870, 47.11, 0.66, 1.50)
-
-GM 		= GeneralMotors	(492500, 31.53, 4.82, 1.65)
-FCAU 	= Chrysler	(887000, 6.88, 0, 1.33)
-F		= Ford		(500900, 12.38, 5.81, 1.21)
-
-companies	= [AAPL, MSFT, GOOGL, JPM, WFC, C, GM, FCAU, F] #not DRY
-tech 		= [AAPL, MSFT, GOOGL]
-finance 	= [JPM, WFC, C]
-automobile 	= [GM, FCAU, F]
 
 Console.WindowHeight = Console.LargestWindowHeight
 Console.WindowWidth = Console.LargestWindowWidth/2
 
 
+#task "Decrease share price":
+#		starting_when round == 0:
+#			repeat_every 5:
+#				decrease_share_price AAPL, 5.6.points if AAPL.SharePrice < 90
 
-execute:
-	increase_share_price AAPL, 5.6.points unless AAPL.SharePrice > 5
 
 #sell AAPL, 20.shares
 #
@@ -190,13 +211,47 @@ execute:
 #buy AAPL, 33.shares
 #print AAPL.MarketCap
 
+while true:
+	Console.Clear()
+	val = random.Next() % 30
+	
+	if val < 15:
+		buy companies[random.Next() % 9], random.Next()%20.shares
+	else:
+		sell companies[random.Next() % 9], random.Next()%20.shares
+	
+	if val == 29:
+		create_bubble finance
+	elif val == 28:
+		create_bubble automobile
+	elif val == 27:
+		create_bubble tech
+	elif val == 26:
+		create_recession
+		
+	if val % 4 == 0 :
+		increase_share_price companies[random.Next() % 9], random.NextDouble().percent
+	if val%5==0:
+		decrease_share_price companies[random.Next() % 9], random.NextDouble().percent
+	if val%8 == 0:
+		increase_beta companies[random.Next() % 9], random.NextDouble().points
+	if val%10 == 0:
+		decrease_beta companies[random.Next() % 9], random.NextDouble().points
+	if val% 12 == 0:
+		increase_dividend companies[random.Next() % 9], random.NextDouble().percent
+	if val% 13 == 0:
+		decrease_dividend companies[random.Next() % 9], random.NextDouble().percent
+		
+	when AAPL.SharePrice > 100:
+		increase_share_price AAPL, 5.6.points
+	
+	
+	update companies
+	introspect investor
+
+	print "Press any key to continue . . . "
+	Console.ReadKey(true)
+	
 
 
-update companies
 
-introspect investor
-
-
-
-print "Press any key to continue . . . "
-Console.ReadKey(true)
