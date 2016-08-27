@@ -3,10 +3,18 @@
 import System
 
 
+
 enum Ticker:
 	AAPL
 	MSFT
 	GOOGL
+	JPM
+	WFC
+	C
+	GM
+	FCAU
+	F
+	
 	
 
 class Company:
@@ -31,7 +39,7 @@ class Company:
 	_previousSharePrice as double
 
 	
-	#in thousands
+	#in millions
 	MarketCap as double:
 		get:
 			return Math.Round(_marketCap, 2)

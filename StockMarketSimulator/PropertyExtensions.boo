@@ -58,8 +58,8 @@ macro introspect:
     		Console.ForegroundColor = ConsoleColor.Green
     		Console.WriteLine(String(char('='), 40))
     		
-    		Console.ForegroundColor = ConsoleColor.White
-    		Console.WriteLine("Balance: {0}", $investor.Balance)
+
+    		Console.WriteLine("Balance: {0}", $investor.Balance + differenceString(investor.getBalanceDifference))
     		Console.ForegroundColor = ConsoleColor.White
     		
     		Console.WriteLine()
@@ -68,7 +68,7 @@ macro introspect:
     		Console.WriteLine("Portfolio")
     		Console.WriteLine("==========")    		
     		for item in investor.Portfolio:
-    			Console.WriteLine()
+
     			
     			previousShareCount = (item.Value as (int))[0]
     			currentShareCount = (item.Value as (int))[1]

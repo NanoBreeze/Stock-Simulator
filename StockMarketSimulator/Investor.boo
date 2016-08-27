@@ -10,17 +10,44 @@ class Investor:
 	_portfolio as Hash
 	
 	
-	[Property(Balance)]
+	[Getter(Balance)]
 	_balance as double
 	
+	[Getter(PreviousBalance)]
+	_previousBalance as double
+	
 	public def constructor():
-		_portfolio = {Ticker.AAPL: (0, 5)} 
+		_portfolio = {
+			Ticker.AAPL: (0, 0),
+			Ticker.MSFT: (0, 0),
+			Ticker.GOOGL:(0, 0),
+			Ticker.JPM:	 (0, 0),
+			Ticker.WFC:	 (0, 0),
+			Ticker.C:	 (0, 0),
+			Ticker.GM:	 (0, 0),
+			Ticker.FCAU: (0, 0),
+			Ticker.F:	 (0, 0)
+		}
+		
 		_balance = 99999
 		
 		
-	public def updatePortfolio(ticker as Ticker, newShareCount as int):
+	public def buy(ticker as Ticker, sharePrice as double, shareCount as int):
 		(_portfolio[ticker] as (int))[0] = (_portfolio[ticker] as (int))[1]
-		(_portfolio[ticker] as (int))[1] += newShareCount
+		(_portfolio[ticker] as (int))[1] += shareCount
+		
+		_previousBalance = _balance
+		_balance -= sharePrice * shareCount
+
+	public def sell(ticker as Ticker, sharePrice as double, shareCount as int):
+		(_portfolio[ticker] as (int))[0] = (_portfolio[ticker] as (int))[1]
+		(_portfolio[ticker] as (int))[1] -= shareCount
+		
+		_previousBalance = _balance
+		_balance += sharePrice * shareCount
+		
+	public def getBalanceDifference():
+		return Math.Round(_balance - _previousBalance, 2)
 		
 
 
