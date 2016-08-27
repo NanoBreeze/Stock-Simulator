@@ -43,7 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.boo" />
-    <Compile Include="Class1.boo" />
     <Compile Include="Companies.boo" />
     <Compile Include="Company.boo" />
     <Compile Include="Investor.boo" />

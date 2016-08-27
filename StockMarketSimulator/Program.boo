@@ -46,92 +46,6 @@ def sell(company as Company, shareCount as int):
 	investor.sell(company.Ticker, company.SharePrice, shareCount)
 
 
-def increase_share_price(company as Company, amount as double):
-/*Increase the share price of the specified company. Although the amount is specified for double, it accepts integers too because of implicit cast
-	If the amount is negative, the increase is a percentage. 
-	If it's positive, the increase is by points*/
-	
-	#percentage
-	if amount < 0:
-		change = amount * -1/100 + 1
-		company.SharePrice *= change
-	#points
-	else:
-		company.SharePrice += amount
-
-	
-	
-def decrease_share_price(company as Company, amount as double):
-/*Increase the share price of the specified company. Although the amount is specified for double, it accepts integers too because of implicit cast
-	If the amount is negative, the increase is a percentage. 
-	If it's positive, the increase is by points*/
-	
-	#percentage
-	if amount < 0:
-		change = 1 + amount / 100  #remember amount is negative and so we +
-		company.SharePrice *= change
-	#points
-	else:
-		company.SharePrice -= amount
-
-
-def increase_dividend(company as Company, amount as double):
-/*Increase the share price of the specified company. Although the amount is specified for double, it accepts integers too because of implicit cast
-	If the amount is negative, the increase is a percentage. 
-	If it's positive, the increase is by points*/
-	
-	#percentage
-	if amount < 0:
-		change = amount * -1/100 + 1
-		company.Dividend *= change
-	#points
-	else:
-		company.Dividend += amount
-
-	
-	
-def decrease_dividend(company as Company, amount as double):
-/*Increase the share price of the specified company. Although the amount is specified for double, it accepts integers too because of implicit cast
-	If the amount is negative, the increase is a percentage. 
-	If it's positive, the increase is by points*/
-	
-	#percentage
-	if amount < 0:
-		change = 1 + amount / 100  #remember amount is negative and so we +
-		company.Dividend *= change
-	#points
-	else:
-		company.Dividend -= amount
-		
-def increase_beta(company as Company, amount as double):
-/*Increase the share price of the specified company. Although the amount is specified for double, it accepts integers too because of implicit cast
-	If the amount is negative, the increase is a percentage. 
-	If it's positive, the increase is by points*/
-	
-	#percentage
-	if amount < 0:
-		change = amount * -1/100 + 1
-		company.Beta *= change
-	#points
-	else:
-		company.Beta += amount
-
-	
-	
-def decrease_beta(company as Company, amount as double):
-/*Increase the share price of the specified company. Although the amount is specified for double, it accepts integers too because of implicit cast
-	If the amount is negative, the increase is a percentage. 
-	If it's positive, the increase is by points*/
-	
-	#percentage
-	if amount < 0:
-		change = 1 + amount / 100  #remember amount is negative and so we +
-		company.Beta *= change
-	#points
-	else:
-		company.Beta -= amount
-
-
 
 def create_bubble(list as List):
 	for c in list:
@@ -230,21 +144,21 @@ while true:
 		create_recession
 		
 	if val % 4 == 0 :
-		increase_share_price companies[random.Next() % 9], random.NextDouble().percent
+		cast(Company, companies[random.Next() % 9]).decrease_share_price(random.NextDouble().percent)
 	if val%5==0:
-		decrease_share_price companies[random.Next() % 9], random.NextDouble().percent
+		cast(Company, companies[random.Next() % 9]).increase_share_price(random.NextDouble().percent)
 	if val%8 == 0:
-		increase_beta companies[random.Next() % 9], random.NextDouble().points
+		cast(Company, companies[random.Next() % 9]).increase_beta(random.NextDouble().points)
 	if val%10 == 0:
-		decrease_beta companies[random.Next() % 9], random.NextDouble().points
+		cast(Company, companies[random.Next() % 9]).decrease_beta(random.NextDouble().points)
 	if val% 12 == 0:
-		increase_dividend companies[random.Next() % 9], random.NextDouble().percent
+		cast(Company, companies[random.Next() % 9]).increase_dividend(random.NextDouble().percent)
 	if val% 13 == 0:
-		decrease_dividend companies[random.Next() % 9], random.NextDouble().percent
+		cast(Company, companies[random.Next() % 9]).decrease_dividend(random.NextDouble().percent)
 		
-	when AAPL.SharePrice > 100:
-		increase_share_price AAPL, 5.6.points
+	cast(Company, companies[random.Next() % 9]).increase_beta(random.NextDouble().points).increase_share_price(random.NextDouble().percent).increase_dividend(random.NextDouble().percent)
 	
+	cast(Company, companies[random.Next() % 9]).decrease_beta(random.NextDouble().points).decrease_share_price(random.NextDouble().percent).decrease_dividend(random.NextDouble().percent)
 	
 	update companies
 	introspect investor

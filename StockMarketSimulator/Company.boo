@@ -105,3 +105,98 @@ class Company:
 		
 	public def getBetaDifference() as double:
 		return Math.Round(_beta - _previousBeta, 2)
+
+
+	
+	def increase_share_price(amount as double):
+	/*Increase the share price of the specified company. Although the amount is specified for double, it accepts integers too because of implicit cast
+		If the amount is negative, the increase is a percentage. 
+		If it's positive, the increase is by points*/
+		
+		#percentage
+		if amount < 0:
+			change = amount * -1/100 + 1
+			SharePrice *= change
+		#points
+		else:
+			SharePrice += amount
+	
+		return self
+		
+		
+	def decrease_share_price(amount as double):
+	/*Increase the share price of the specified company. Although the amount is specified for double, it accepts integers too because of implicit cast
+		If the amount is negative, the increase is a percentage. 
+		If it's positive, the increase is by points*/
+		
+		#percentage
+		if amount < 0:
+			change = 1 + amount / 100  #remember amount is negative and so we +
+			SharePrice *= change
+		#points
+		else:
+			SharePrice -= amount
+	
+		return self
+	
+	def increase_dividend(amount as double):
+	/*Increase the share price of the specified company. Although the amount is specified for double, it accepts integers too because of implicit cast
+		If the amount is negative, the increase is a percentage. 
+		If it's positive, the increase is by points*/
+		
+		#percentage
+		if amount < 0:
+			change = amount * -1/100 + 1
+			Dividend *= change
+		#points
+		else:
+			Dividend += amount
+	
+		return self
+		
+		
+	def decrease_dividend(amount as double):
+	/*Increase the share price of the specified company. Although the amount is specified for double, it accepts integers too because of implicit cast
+		If the amount is negative, the increase is a percentage. 
+		If it's positive, the increase is by points*/
+		
+		#percentage
+		if amount < 0:
+			change = 1 + amount / 100  #remember amount is negative and so we +
+			Dividend *= change
+		#points
+		else:
+			Dividend -= amount
+			
+		return self
+			
+	def increase_beta(amount as double):
+	/*Increase the share price of the specified company. Although the amount is specified for double, it accepts integers too because of implicit cast
+		If the amount is negative, the increase is a percentage. 
+		If it's positive, the increase is by points*/
+		
+		#percentage
+		if amount < 0:
+			change = amount * -1/100 + 1
+			Beta *= change
+		#points
+		else:
+			Beta += amount
+	
+		return self
+		
+		
+	def decrease_beta(amount as double):
+	/*Increase the share price of the specified company. Although the amount is specified for double, it accepts integers too because of implicit cast
+		If the amount is negative, the increase is a percentage. 
+		If it's positive, the increase is by points*/
+		
+		#percentage
+		if amount < 0:
+			change = 1 + amount / 100  #remember amount is negative and so we +
+			Beta *= change
+		#points
+		else:
+			Beta -= amount
+			
+		return self
