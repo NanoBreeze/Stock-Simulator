@@ -5,10 +5,10 @@ import System
 class Apple(Company):
 """Description of Apple"""
 	
-	public def constructor(ticker as Ticker, marketCap as double,
+	public def constructor(marketCap as double,
 					   sharePrice as double, dividend as double, beta as double):
 					   	
-		super(ticker, marketCap, sharePrice, dividend, beta)
+		super(Ticker.AAPL, marketCap, sharePrice, dividend, beta)
 		
 		
 

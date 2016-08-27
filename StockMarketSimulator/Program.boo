@@ -2,26 +2,29 @@
 
 import System
 
+import StockMarketSimulator.IntegerExtensions
+import StockMarketSimulator.DoubleExtensions
 import System.Collections
 import Boo.Lang
 import Boo.Lang.Extensions
-import Boo.Lang.Compiler
-import Boo.Lang.Compiler.Ast
-import StockMarketSimulator.IntegerExtensions
-import StockMarketSimulator.DoubleExtensions
 
 
 
+investor = Investor()
 
-player = Player()
 
 def buy(company as Company, shareCount as int):
 	#Because player.Portfolio[company.Ticker] += shareCount isn't valid
 	
-	updatedShareCount = cast(int, player.Portfolio[company.Ticker]) + shareCount
+	investor.updatePortfolio(company.Ticker, shareCount)
 	
-	player.Portfolio[company.Ticker] = updatedShareCount
-	print player.Portfolio[company.Ticker]
+
+def sell(company as Company, shareCount as int):
+	#Because player.Portfolio[company.Ticker] += shareCount isn't valid
+	
+	shareCount *= -1
+	investor.updatePortfolio(company.Ticker, shareCount)
+
 
 def increase(company as Company, amount as double):
 /*Increase the share price of the specified company. Although the amount is specified for double, it accepts integers too because of implicit cast
@@ -52,125 +55,27 @@ def decrease(company as Company, amount as double):
 
 	print company.SharePrice
 
-AAPL = Apple(Ticker.AAPL, 200, 107, 1.3, 1.5)
+AAPL = Apple(576000, 106.94, 2.11, 1.38)
+MSFT = Microsoft(455000, 58.03, 2.48, 1.26)
+GOOGL = Google(545000, 793.22, 0, 1.06)
+
+companies = [AAPL, MSFT, GOOGL]
 
 
-
-
-buy AAPL, 20.shares
-
-print AAPL.MarketCap
+#sell AAPL, 20.shares
+#
+#print AAPL.MarketCap
 decrease AAPL, 5.6.points
-print AAPL.MarketCap
-
-#print player.Portfolio
-
+buy AAPL, 33.shares
+#print AAPL.MarketCap
 
 
 
+update companies
+
+introspect investor
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-#
-#
-#def hi(a as string, b as string):
-#	print a
-#	print b
-#	
-#hi "Lenny", "Cheng"
-#
-#macro Unroll2:
-#	# extract the second parameter value
-#	end = cast(IntegerLiteralExpression, Unroll2.Arguments[1]).Value
-#
-#	for i in range(end):
-#		# create assignment statement, using the block:
-#		# trick and add it to
-#		# the output
-#		statement = [|
-#			block:
-#				$(Unroll2.Arguments[0]) = $i
-#		|].Body
-#		
-#		yield statement
-#		# add the original contents of the macro
-#		# to the output
-#		yield Unroll2.Body
-#
-#
-#Unroll2 i, 5:
-#	print i
-#
-##macro declaration
-#macro should_fail:
-#    #create code using Quasi Quotation ( ”[|" and "|]“ )
-#    codeblock = [| 
-#    	print "Hello"
-##         raise AssertionError("failed by request")
-#    |] #exit macro statement
-#    return codeblock #now replace ”should_fail” with ”raise AssertionError() ”
-
-#client code
-
-#should_fail #throws AssertionError
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#macro Unroll2:
-#	end = cast(IntegerLiteralExpression, Unroll2.Arguments[1]).Value
-#	
-#	for i in range(end):
-#		statement = [|
-#			block:
-#				$(Unroll2.Arguments[0]) = $i
-#			|].Body
-#			yield statement
-#			
-#			yield Unroll2.Body
-
-
-#a = ArrayList()
-#a.Add("oijosidjf")
-#print a.Length
-
-
-#
-#[Extension]
-#static EUR(abc as double}:
-# 	get:
-# 		return abc
-
-
-#verify 5 is not null
-
-#[Extension]
-#static EUR[value as double]:
-#	get:
-#		return value * 1
-
-// TODO: Implement Functionality Here
 
 print "Press any key to continue . . . "
 Console.ReadKey(true)

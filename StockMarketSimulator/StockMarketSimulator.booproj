@@ -46,7 +46,9 @@
     <Compile Include="AssemblyInfo.boo" />
     <Compile Include="Class1.boo" />
     <Compile Include="Company.boo" />
-    <Compile Include="Player.boo" />
+    <Compile Include="Google.boo" />
+    <Compile Include="Microsoft.boo" />
+    <Compile Include="Investor.boo" />
     <Compile Include="Program.boo" />
     <Compile Include="PropertyExtensions.boo" />
   </ItemGroup>
