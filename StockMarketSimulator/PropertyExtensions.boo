@@ -22,6 +22,11 @@ class IntegerExtensions:
 		get:
 			return integer * -1
 			
+	[Extension]
+	static rounds[integer as int]:
+		get:
+			return integer
+			
 
 class DoubleExtensions:
 """Property extensions for doubles"""

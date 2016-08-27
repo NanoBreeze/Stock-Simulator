@@ -48,7 +48,6 @@
     <Compile Include="Investor.boo" />
     <Compile Include="Program.boo" />
     <Compile Include="PropertyExtensions.boo" />
-    <Compile Include="Task.boo" />
   </ItemGroup>
   <Import Project="$(BooBinPath)\Boo.Microsoft.Build.targets" />
 </Project>

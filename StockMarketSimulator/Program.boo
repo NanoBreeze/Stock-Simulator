@@ -11,7 +11,6 @@ import Boo.Lang.Extensions
 
 
 investor = Investor()
-round = 0
 random = Random()
 tasks = []
 
@@ -57,73 +56,20 @@ def create_recession():
 		cast(Company, company).SharePrice *= random.NextDouble()
 
 
-/*Tasks are schedulers.
-
-task "Name":
-	execute:
-		[action] unless [action]
-	starting_when:
-		[boolean]
-
-task "Name":
-	every [number] rounds	
-	when [boolean]:
-		[callable action to do]
-	when [boolean]:
-		[stop callable action]
-		
-*/
-
-
-/*
-when AAPL.SharePrice > 100:
-	decrease_share_price AAPL, 5.6.points
-*/
-
 def when(condition as bool, block as callable):
 	if condition:
 		block()
 
-#syntactic sugar, identical to when
-def starting_when(condition as bool, block as callable):
-	if condition:
-		block()
-		return true
-	
-def repeat_every(roundCount as int, block as callable):
-	unless round % roundCount == 0 :
-		return false
-	block()
 
-def task(description as string, block as callable):
-	block()
-
+def repeat_every(roundCount as int, action as callable):
+	if roundCount % round:
+		action()
 
 
 
 Console.WindowHeight = Console.LargestWindowHeight
 Console.WindowWidth = Console.LargestWindowWidth/2
 
-
-#task "Decrease share price":
-#		starting_when round == 0:
-#			repeat_every 5:
-#				decrease_share_price AAPL, 5.6.points if AAPL.SharePrice < 90
-
-
-#sell AAPL, 20.shares
-#
-#print AAPL.MarketCap
-
-
-
-#when AAPL.SharePrice > 100:
-#	increase_share_price AAPL, 5.6.points
-	
-
-
-#buy AAPL, 33.shares
-#print AAPL.MarketCap
 
 while true:
 	Console.Clear()
@@ -159,6 +105,7 @@ while true:
 	cast(Company, companies[random.Next() % 9]).increase_beta(random.NextDouble().points).increase_share_price(random.NextDouble().percent).increase_dividend(random.NextDouble().percent)
 	
 	cast(Company, companies[random.Next() % 9]).decrease_beta(random.NextDouble().points).decrease_share_price(random.NextDouble().percent).decrease_dividend(random.NextDouble().percent)
+	
 	
 	update companies
 	introspect investor
